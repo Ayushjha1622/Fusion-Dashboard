@@ -10,25 +10,34 @@ const authMiddleware = require("./middlewares/auth.middleware");
 
 const app = express();
 
-// Middlewares
+// 1. Core Parsers (Must be first)
+app.use(express.json());
+app.use(cookieParser());
+
+// 2. Advanced CORS
 const allowedOrigins = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : [];
 
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
-    
-    // In development, allow everything. In production, check the whitelist.
     if (process.env.NODE_ENV !== 'production' || allowedOrigins.includes(origin)) {
       callback(null, origin);
     } else {
-      console.log("CORS Blocked for origin:", origin);
       callback(new Error('Not allowed by CORS'));
     }
   },
   credentials: true
 }));
-app.use(express.json());
+
+// Manual header fallback for some proxies
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin) || process.env.NODE_ENV !== 'production') {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+  res.header('Access-Control-Allow-Credentials', 'true');
+  next();
+});
 
 // Request Logger
 app.use((req, res, next) => {
@@ -39,7 +48,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // Auth Routes (public)
