@@ -28,14 +28,14 @@ export default function Dashboard() {
       {/* MOBILE BACKDROP */}
       {isSidebarOpen && (
         <div 
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[45] lg:hidden"
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[2900] lg:hidden"
           onClick={() => setIsSidebarOpen(false)}
         />
       )}
 
       {/* TACTICAL SIDEBAR */}
       <aside className={`
-        fixed inset-y-0 left-0 w-80 h-full glass-panel flex flex-col z-50 shadow-2xl transition-transform duration-300 ease-in-out
+        fixed inset-y-0 left-0 w-80 h-full glass-panel flex flex-col z-[3000] shadow-2xl transition-transform duration-300 ease-in-out
         ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
         lg:relative lg:translate-x-0
       `}>
@@ -112,7 +112,7 @@ export default function Dashboard() {
       {/* MAIN VIEWPORT */}
       <main className="flex-1 flex flex-col relative overflow-hidden">
         {/* HEADER / HUD BAR */}
-        <header className="h-16 glass-panel border-b border-border border-opacity-30 flex items-center justify-between px-4 lg:px-10 z-40">
+        <header className="h-16 glass-panel border-b border-border border-opacity-30 flex items-center justify-between px-4 lg:px-10 z-[2000]">
           <div className="flex items-center gap-4 lg:gap-8">
             {/* MOBILE MENU TOGGLE */}
             <button 

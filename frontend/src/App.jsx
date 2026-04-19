@@ -182,7 +182,7 @@ function App({ mapMode }) {
       </MapContainer>
 
       {/* INTEL LEGEND */}
-      <div className="absolute bottom-12 left-4 lg:bottom-6 lg:left-6 glass-panel p-3 lg:p-4 z-[1000] border border-border border-opacity-30 shadow-2xl animate-fadeInSlideUp hidden sm:block">
+      <div className="absolute bottom-12 left-4 lg:bottom-6 lg:left-6 glass-panel p-3 lg:p-4 z-[1900] border border-border border-opacity-30 shadow-2xl animate-fadeInSlideUp hidden sm:block">
         <div className="mb-2 lg:mb-3 font-orbitron text-[8px] lg:text-[9px] font-bold tracking-[0.2em] text-primary">INTEL LEGEND</div>
         <div className="space-y-2 lg:space-y-2.5">
           <div className="flex items-center gap-2 lg:gap-3 group cursor-default">
@@ -201,7 +201,7 @@ function App({ mapMode }) {
       </div>
 
       {/* FLOATING HUD CONTROLS - TOP LEFT */}
-      <div className="absolute top-4 left-4 lg:top-6 lg:left-6 flex flex-col gap-4 z-[1000] w-[calc(100%-2rem)] sm:w-auto">
+      <div className="absolute top-[80px] left-4 lg:top-24 lg:left-6 flex flex-col gap-4 z-[1900] w-[calc(100%-2rem)] sm:w-auto">
         <div className="glass-panel p-3 lg:p-4 flex flex-col gap-3 min-w-0 sm:min-w-[240px]">
            <div className="flex items-center justify-between">
               <span className="text-[8px] lg:text-[9px] font-orbitron font-bold tracking-widest text-primary text-opacity-80 uppercase">Target Search</span>
@@ -231,7 +231,7 @@ function App({ mapMode }) {
       </div>
 
       {/* FLOATING ACTION - BOTTOM RIGHT */}
-      <div className="absolute bottom-14 right-4 lg:bottom-16 lg:right-6 flex flex-col gap-3 items-end z-[1000] max-w-[calc(100%-2rem)]">
+      <div className="absolute bottom-14 right-4 lg:bottom-16 lg:right-6 flex flex-col gap-3 items-end z-[1900] max-w-[calc(100%-2rem)]">
         {showIngestion && (
           <div className="glass-panel p-4 lg:p-6 w-full sm:w-[320px] mb-2" style={{ animation: 'fadeInSlideUp 0.3s ease-out forwards' }}>
              <div className="flex justify-between items-center mb-4 lg:mb-6">
@@ -289,7 +289,7 @@ function App({ mapMode }) {
       </div>
 
       {/* BOTTOM TICKER */}
-      <div className="absolute bottom-0 left-0 w-full h-8 lg:h-10 glass-panel border-t border-border border-opacity-30 flex items-center px-4 lg:px-10 z-50">
+      <div className="absolute bottom-0 left-0 w-full h-8 lg:h-10 glass-panel border-t border-border border-opacity-30 flex items-center px-4 lg:px-10 z-[2000]">
           <div className="flex items-center w-full gap-4 lg:gap-8 overflow-hidden">
              <div className="bg-primary bg-opacity-20 border border-primary border-opacity-30 text-primary font-bold font-orbitron text-[7px] lg:text-[8px] px-2 lg:px-3 py-0.5 lg:py-1 uppercase tracking-tighter flex items-center gap-1.5 lg:gap-2 shrink-0">
                 <span className="w-1 lg:w-1.5 h-1 lg:h-1.5 rounded-full bg-primary animate-ping"></span>
