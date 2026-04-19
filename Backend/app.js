@@ -11,13 +11,23 @@ const authMiddleware = require("./middlewares/auth.middleware");
 const app = express();
 
 // Middlewares
-const corsOptions = {
-  origin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : "http://localhost:5173",
-  credentials: true,
-  optionsSuccessStatus: 200
-};
+const allowedOrigins = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : [];
 
-app.use(cors(corsOptions));
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+    
+    const isAllowed = allowedOrigins.includes(origin) || process.env.NODE_ENV !== 'production';
+    
+    if (isAllowed) {
+      callback(null, origin); // Return the origin itself instead of 'true'
+    } else {
+      console.log("CORS Blocked for origin:", origin);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
 app.use(express.json());
 
 // Request Logger
