@@ -87,7 +87,7 @@ export default function Signup() {
         <div className="absolute inset-0 grid-overlay opacity-[0.05] lg:hidden"></div>
 
         {/* Glass card */}
-        <div className="relative z-10 w-full max-w-[440px] glass-panel p-10 shadow-2xl space-y-8 border-secondary/10">
+        <div className="relative z-10 w-full max-w-[440px] glass-panel p-6 sm:p-10 shadow-2xl space-y-8 border-secondary/10">
           {/* Header */}
           <div className="space-y-4">
             <div className="flex items-center gap-4">

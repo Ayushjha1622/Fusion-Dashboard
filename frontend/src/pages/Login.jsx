@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
-const BASE_URL = import.meta.env.VITE_API_URL || '';
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 export default function Login() {
   const [email, setEmail]       = useState('');
@@ -87,7 +87,7 @@ export default function Login() {
         <div className="absolute inset-0 grid-overlay opacity-[0.05] lg:hidden"></div>
 
         {/* Glass card */}
-        <div className="relative z-10 w-full max-w-[420px] glass-panel p-10 shadow-2xl space-y-8 border-primary/10">
+        <div className="relative z-10 w-full max-w-[420px] glass-panel p-6 sm:p-10 shadow-2xl space-y-8 border-primary/10">
           {/* Header */}
           <div className="space-y-4">
             <div className="flex items-center gap-4">
