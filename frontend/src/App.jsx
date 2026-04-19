@@ -4,6 +4,8 @@ import { MapContainer, TileLayer, CircleMarker, Tooltip, Popup } from 'react-lea
 import MarkerClusterGroup from 'react-leaflet-cluster';
 import 'leaflet/dist/leaflet.css';
 
+const BASE_URL = import.meta.env.VITE_API_URL ;
+
 function App({ mapMode }) {
   const [intelData, setIntelData] = useState([]);
   const [filterType, setFilterType] = useState('');
@@ -22,7 +24,7 @@ function App({ mapMode }) {
   }, [filterType, searchTerm, dateFilter]);
 
   useEffect(() => {
-    const socket = io(import.meta.env.VITE_SOCKET_URL || window.location.origin);
+    const socket = io(BASE_URL);
     socket.on('intel:update', () => fetchData());
     return () => socket.disconnect();
   }, []);
@@ -35,7 +37,7 @@ function App({ mapMode }) {
       if (searchTerm) params.append('search', searchTerm);
       if (dateFilter) params.append('date', dateFilter);
 
-      const response = await fetch(`/api/data?${params.toString()}`, { credentials: "include" });
+      const response = await fetch(`${BASE_URL}/api/data?${params.toString()}`, { credentials: "include" });
       if (!response.ok) return setIntelData([]);
       const data = await response.json();
       setIntelData(Array.isArray(data) ? data : []);
@@ -61,7 +63,7 @@ function App({ mapMode }) {
 
     try {
       setUploadStatus('SYNCING NODES...');
-      const response = await fetch('/api/humint', {
+      const response = await fetch(`${BASE_URL}/api/humint`, {
         method: 'POST',
         body: formData,
         credentials: 'include'
@@ -83,7 +85,7 @@ function App({ mapMode }) {
 
     try {
       setUploadStatus('UPLOADING IMINT...');
-      const response = await fetch('/api/imint', {
+      const response = await fetch(`${BASE_URL}/api/imint`, {
         method: 'POST',
         body: formData,
         credentials: 'include'

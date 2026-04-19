@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 
+const BASE_URL = import.meta.env.VITE_API_URL || '';
+
 /**
  * Wraps any route that requires authentication.
  * Hits /api/data (already protected by authMiddleware on the backend).
@@ -14,7 +16,7 @@ export default function ProtectedRoute({ children }) {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch("/api/data", { credentials: "include" });
+        const res = await fetch(`${BASE_URL}/api/data`, { credentials: "include" });
         setIsAuth(res.ok); // 200 = authenticated
       } catch {
         setIsAuth(false);

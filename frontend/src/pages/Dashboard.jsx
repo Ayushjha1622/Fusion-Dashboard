@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import App from "../App.jsx";
 import { useNavigate } from "react-router-dom";
 
+const BASE_URL = import.meta.env.VITE_API_URL || 'https://fusion-dashboard-r03u.onrender.com';
+
 export default function Dashboard() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("map");
 
   const handleLogout = async () => {
     try {
-      await fetch("/api/logout", { method: "POST", credentials: "include" });
+      await fetch(`${BASE_URL}/api/logout`, { method: "POST", credentials: "include" });
       navigate("/login");
     } catch (err) {
       console.error("Logout failed", err);
@@ -19,7 +21,7 @@ export default function Dashboard() {
     <div className="flex h-screen bg-background text-on-surface font-body overflow-hidden">
       {/* SCAN LINE EFFECT */}
       <div className="scan-line opacity-10"></div>
-      
+
       {/* TACTICAL SIDEBAR */}
       <aside className="w-80 h-full glass-panel flex flex-col z-50 shadow-2xl relative">
         {/* LOGO AREA */}
@@ -37,23 +39,23 @@ export default function Dashboard() {
 
         {/* NAVIGATION / TABS */}
         <nav className="p-6 space-y-2 flex-1">
-          <button 
+          <button
             onClick={() => setActiveTab("map")}
             className={`w-full flex items-center gap-4 px-4 py-3 rounded-none transition-all duration-300 group ${activeTab === 'map' ? 'bg-primary bg-opacity-10 border-l-2 border-primary text-primary' : 'text-on-surface-dim hover:text-white hover:bg-white hover:bg-opacity-5'}`}
           >
             <span className={`material-symbols-outlined text-xl ${activeTab === 'map' ? 'neon-text-cyan' : ''}`}>grid_view</span>
             <span className="font-orbitron text-[10px] font-bold tracking-widest uppercase">Tactical Map</span>
           </button>
-          
-          <button 
+
+          <button
             onClick={() => setActiveTab("matrix")}
             className={`w-full flex items-center gap-4 px-4 py-3 rounded-none transition-all duration-300 group ${activeTab === 'matrix' ? 'bg-primary bg-opacity-10 border-l-2 border-primary text-primary' : 'text-on-surface-dim hover:text-white hover:bg-white hover:bg-opacity-5'}`}
           >
             <span className="material-symbols-outlined text-xl">database</span>
             <span className="font-orbitron text-[10px] font-bold tracking-widest uppercase">Data Matrix</span>
           </button>
-          
-          <button 
+
+          <button
             onClick={() => setActiveTab("sat")}
             className={`w-full flex items-center gap-4 px-4 py-3 rounded-none transition-all duration-300 group ${activeTab === 'sat' ? 'bg-primary bg-opacity-10 border-l-2 border-primary text-primary' : 'text-on-surface-dim hover:text-white hover:bg-white hover:bg-opacity-5'}`}
           >
@@ -73,8 +75,8 @@ export default function Dashboard() {
               <div className="text-[9px] text-primary text-opacity-60 font-mono">CLEARANCE: OMEGA</div>
             </div>
           </div>
-          
-          <button 
+
+          <button
             onClick={handleLogout}
             className="w-full flex items-center justify-center gap-2 py-3 border border-accent border-opacity-30 text-accent text-opacity-80 hover:bg-accent hover:text-white hover:border-accent transition-all duration-300 font-orbitron text-[9px] font-bold tracking-[0.2em] uppercase"
           >
@@ -99,17 +101,17 @@ export default function Dashboard() {
               <span>Grid: <span className="text-white">XV-902</span></span>
             </div>
           </div>
-          
+
           <div className="flex items-center gap-6">
-             <div className="text-right">
-                <div className="text-[9px] font-mono text-on-surface-dim">SYSTEM UPTIME</div>
-                <div className="text-[11px] font-mono text-primary">04:12:44:09</div>
-             </div>
-             <div className="h-8 w-[1px] bg-border/40"></div>
-             <div className="flex gap-4 text-on-surface-dim">
-                <span className="material-symbols-outlined hover:text-primary cursor-pointer transition-colors">notifications</span>
-                <span className="material-symbols-outlined hover:text-primary cursor-pointer transition-colors">settings</span>
-             </div>
+            <div className="text-right">
+              <div className="text-[9px] font-mono text-on-surface-dim">SYSTEM UPTIME</div>
+              <div className="text-[11px] font-mono text-primary">04:12:44:09</div>
+            </div>
+            <div className="h-8 w-[1px] bg-border/40"></div>
+            <div className="flex gap-4 text-on-surface-dim">
+              <span className="material-symbols-outlined hover:text-primary cursor-pointer transition-colors">notifications</span>
+              <span className="material-symbols-outlined hover:text-primary cursor-pointer transition-colors">settings</span>
+            </div>
           </div>
         </header>
 

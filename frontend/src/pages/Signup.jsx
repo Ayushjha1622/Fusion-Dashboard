@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
+const BASE_URL = import.meta.env.VITE_API_URL;
+
 export default function Signup() {
   const [name, setName]         = useState('');
   const [email, setEmail]       = useState('');
@@ -14,7 +16,7 @@ export default function Signup() {
     setError('');
     setLoading(true);
     try {
-      const res = await fetch('/api/signup', {
+      const res = await fetch(`${BASE_URL}/api/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, password }),
