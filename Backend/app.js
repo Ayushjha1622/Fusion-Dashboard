@@ -15,12 +15,12 @@ const allowedOrigins = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split('
 
 app.use(cors({
   origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
     
-    const isAllowed = allowedOrigins.includes(origin) || process.env.NODE_ENV !== 'production';
-    
-    if (isAllowed) {
-      callback(null, origin); // Return the origin itself instead of 'true'
+    // In development, allow everything. In production, check the whitelist.
+    if (process.env.NODE_ENV !== 'production' || allowedOrigins.includes(origin)) {
+      callback(null, origin);
     } else {
       console.log("CORS Blocked for origin:", origin);
       callback(new Error('Not allowed by CORS'));
